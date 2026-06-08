@@ -1,0 +1,45 @@
+pipeline {
+  agent any
+
+  environment {
+    PROJECT_DIR = '/home/workspace/kosma-api/fast-kosma'   // 서버 내 프로젝트 위치
+    GIT_REPO = 'https://github.com/px64vk12/fast-kosma.git'
+  }
+
+  stages {
+    stage('Git Pull') {
+      steps {
+        dir("/home/workspace/kosma-api/fast-kosma") {
+          git credentialsId: 'github-token', branch: 'main', url: "${GIT_REPO}"
+        
+        }
+      }
+    }
+
+    stage('Docker Build') {
+      steps {
+        dir("/home/workspace/kosma-api/fast-kosma") {
+          sh 'docker build -t fast-kosma-api .'
+        }
+      }
+    }
+
+    stage('Restart Service') {
+      steps {
+        dir("/home/workspace/compose-files/kosma-api") {
+          sh 'docker-compose down'
+          sh 'docker-compose up -d'
+        }
+      }
+    }
+  }
+
+  post {
+    success {
+      echo '✅ 배포 완료'
+    }
+    failure {
+      echo '❌ 배포 실패'
+    }
+  }
+}

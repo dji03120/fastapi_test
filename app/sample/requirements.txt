@@ -1,0 +1,21 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic
+python-dotenv          # .env 설정 사용 시
+sqlalchemy             # DB 연동 시 (ORM)
+asyncpg                # PostgreSQL 비동기 드라이버 (옵션)
+databases              # async DB client
+passlib[bcrypt]        # 비밀번호 암호화
+python-jose[cryptography]  # JWT 인증
+requests-futures
+CouchDB==1.2
+requests==2.32.4
+pillow==11.3.0
+opencv-python-headless==4.10.0.84
+pandas
+pyarrow==22.0.0
+openpyxl
+aiohttp
+httpx
+anthropic
