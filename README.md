@@ -1,51 +1,69 @@
-# fastapi_test
+<div align="center">
 
-A hands-on FastAPI playground for learning how to structure a backend API and deploy it with Docker. Built while working through the basics of routing, versioned service modules, database access, real-time communication, and containerized deployment.
+![Header](https://capsule-render.vercel.app/api?type=waving&color=0:0F172A,100:1E3A8A&height=150&section=header&text=fastapi_test&fontSize=36&fontColor=E2E8F0&animation=fadeIn&fontAlignY=38)
 
-## What It Covers
+**FastAPI playground for API structure design and Docker deployment practice**
 
-**Versioned routers.** `services_v1` and `services_v2` split endpoints into separate router modules, registered in `main.py` with `include_router`.
+[![FastAPI](https://img.shields.io/badge/FastAPI-0F172A?style=for-the-badge&logo=fastapi&logoColor=00C7B7)](#)
+[![Python](https://img.shields.io/badge/Python-0F172A?style=for-the-badge&logo=python&logoColor=3776AB)](#)
+[![Docker](https://img.shields.io/badge/Docker-0F172A?style=for-the-badge&logo=docker&logoColor=2496ED)](#)
+[![SQLite](https://img.shields.io/badge/SQLite-0F172A?style=for-the-badge&logo=sqlite&logoColor=003B57)](#)
 
-**SQLite CRUD.** A simple memo table (`init_db()`) is created automatically on server startup, used to practice basic create/read/update/delete flows.
+</div>
 
-**WebSocket server.** `wsserver.py` demonstrates session creation and a real-time echo endpoint using a connection manager.
+<br>
 
-**CORS middleware.** Configured so the API can be called from a separate frontend.
+## Overview
 
-**Docker deployment.** The `sample/` folder contains a `Dockerfile`, `docker-compose.yaml`, and `Jenkinsfile` for building and running the API in a container and testing remote access.
+A learning repository for getting comfortable with how a real FastAPI service is structured and how to ship it in a container. Rather than one throwaway script, it covers pieces used on the job: versioned routing, a small CRUD backend, real-time communication, cross-origin setup, and containerization.
 
-## Tech Stack
+<br>
 
-FastAPI · Uvicorn · SQLite · WebSocket · Docker / docker-compose
+<details>
+<summary><b>⚡ Project Details</b></summary>
+<br>
 
-## Project Structure
+| Category | Detail |
+|:---|:---|
+| **Stack** | FastAPI, Python, SQLite, Docker |
+| **Scope** | API structure practice, not a production service |
+| **Key Areas** | Versioned routers, CRUD, WebSocket, CORS, containerization |
 
-```
-app/main.py — FastAPI entry point, CORS + router registration
-app/config.py
-app/services_v1/ — v1 routers (read, write, websocket server)
-app/services_v2/ — v2 routers + SQLite CRUD (init_db, memos table)
-app/utils/ — shared helpers, logger, WebSocket manager
-app/sample/ — Docker / docker-compose / Jenkins deploy examples
-```
+**Key Features**
+- Versioned routers (e.g. `/v1`) for clean, extensible structure
+- SQLite-backed CRUD endpoints
+- WebSocket endpoint for real-time bidirectional communication
+- CORS configuration for front-end integration
+- Dockerfile for consistent, reproducible runs
 
-## Run Locally
+</details>
+
+<br>
+
+## What I Learned
+
+- Structuring a FastAPI project with routers, dependencies, and versioning instead of a flat file
+- Basic CRUD design and request/response modeling with Pydantic
+- How WebSocket differs from request/response, and when to use it
+- Packaging a Python service into a Docker image
+
+<br>
+
+## Getting Started
 
 ```bash
-pip install -r app/sample/requirements.txt
-cd app
-uvicorn main:app --reload --port 8000
+uvicorn app.main:app --reload
+# or
+docker build -t fastapi_test .
+docker run -p 8000:8000 fastapi_test
 ```
 
-Then open `http://localhost:8000/docs` for the auto-generated Swagger UI.
+API 문서: `http://localhost:8000/docs`
 
-## Run with Docker
+<br>
 
-```bash
-cd app/sample
-docker compose up --build
-```
+<div align="center">
 
-## Notes
+![Footer](https://capsule-render.vercel.app/api?type=waving&color=0:1E3A8A,100:0F172A&height=90&section=footer)
 
-This is a learning/experimentation repository, not a production service. The goal was to get comfortable with FastAPI's structure and the Docker deployment workflow before building larger API projects.
+</div>
